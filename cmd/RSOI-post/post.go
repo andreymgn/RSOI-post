@@ -6,15 +6,8 @@ import (
 	"github.com/andreymgn/RSOI-post/pkg/post"
 )
 
-const (
-	PostAppID     = "PostAPI"
-	PostAppSecret = "0JDt37eVLP0VcEJB"
-)
-
-func runPost(port int, connString, redisAddr, redisPassword string, redisDB int) error {
-	knownKeys := map[string]string{PostAppID: PostAppSecret}
-
-	server, err := post.NewServer(connString, redisAddr, redisPassword, redisDB, knownKeys)
+func runPost(port int, connString string) error {
+	server, err := post.NewServer(connString)
 	if err != nil {
 		log.Fatal(err)
 	}

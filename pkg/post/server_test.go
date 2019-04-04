@@ -83,18 +83,8 @@ func (mdb *mockdb) getOwner(uid uuid.UUID) (string, error) {
 	return nilUIDString, nil
 }
 
-type mockAuth struct{}
-
-func (ma *mockAuth) Add(appID, appSecret string) (string, error) {
-	return "valid-token", nil
-}
-
-func (ma *mockAuth) Exists(token string) (bool, error) {
-	return true, nil
-}
-
 func TestListPosts(t *testing.T) {
-	s := &Server{&mockdb{}, &mockAuth{}}
+	s := &Server{&mockdb{}}
 	var pageSize int32 = 3
 	req := &pb.ListPostsRequest{PageSize: pageSize, PageNumber: 1}
 	res, err := s.ListPosts(context.Background(), req)
@@ -108,7 +98,7 @@ func TestListPosts(t *testing.T) {
 }
 
 func TestGetPost(t *testing.T) {
-	s := &Server{&mockdb{}, &mockAuth{}}
+	s := &Server{&mockdb{}}
 	req := &pb.GetPostRequest{Uid: nilUIDString}
 	_, err := s.GetPost(context.Background(), req)
 	if err != nil {
@@ -117,7 +107,7 @@ func TestGetPost(t *testing.T) {
 }
 
 func TestGetPostFail(t *testing.T) {
-	s := &Server{&mockdb{}, &mockAuth{}}
+	s := &Server{&mockdb{}}
 	req := &pb.GetPostRequest{Uid: ""}
 	_, err := s.GetPost(context.Background(), req)
 	if err == nil {
@@ -126,7 +116,7 @@ func TestGetPostFail(t *testing.T) {
 }
 
 func TestCreatePost(t *testing.T) {
-	s := &Server{&mockdb{}, &mockAuth{}}
+	s := &Server{&mockdb{}}
 	req := &pb.CreatePostRequest{Title: "success", UserUid: nilUIDString}
 	_, err := s.CreatePost(context.Background(), req)
 	if err != nil {
@@ -135,7 +125,7 @@ func TestCreatePost(t *testing.T) {
 }
 
 func TestCreatePostFail(t *testing.T) {
-	s := &Server{&mockdb{}, &mockAuth{}}
+	s := &Server{&mockdb{}}
 
 	req := &pb.CreatePostRequest{Title: ""}
 	_, err := s.CreatePost(context.Background(), req)
@@ -151,7 +141,7 @@ func TestCreatePostFail(t *testing.T) {
 }
 
 func TestUpdatePost(t *testing.T) {
-	s := &Server{&mockdb{}, &mockAuth{}}
+	s := &Server{&mockdb{}}
 	req := &pb.UpdatePostRequest{Uid: nilUIDString}
 	_, err := s.UpdatePost(context.Background(), req)
 	if err != nil {
@@ -160,7 +150,7 @@ func TestUpdatePost(t *testing.T) {
 }
 
 func TestUpdatePostFail(t *testing.T) {
-	s := &Server{&mockdb{}, &mockAuth{}}
+	s := &Server{&mockdb{}}
 	req := &pb.UpdatePostRequest{Uid: ""}
 	_, err := s.UpdatePost(context.Background(), req)
 	if err == nil {
@@ -169,7 +159,7 @@ func TestUpdatePostFail(t *testing.T) {
 }
 
 func TestDeletePost(t *testing.T) {
-	s := &Server{&mockdb{}, &mockAuth{}}
+	s := &Server{&mockdb{}}
 	req := &pb.DeletePostRequest{Uid: nilUIDString}
 	_, err := s.DeletePost(context.Background(), req)
 	if err != nil {
@@ -178,7 +168,7 @@ func TestDeletePost(t *testing.T) {
 }
 
 func TestDeletePostFail(t *testing.T) {
-	s := &Server{&mockdb{}, &mockAuth{}}
+	s := &Server{&mockdb{}}
 	req := &pb.DeletePostRequest{Uid: ""}
 	_, err := s.DeletePost(context.Background(), req)
 	if err == nil {
@@ -187,7 +177,7 @@ func TestDeletePostFail(t *testing.T) {
 }
 
 func TestCheckExists(t *testing.T) {
-	s := &Server{&mockdb{}, &mockAuth{}}
+	s := &Server{&mockdb{}}
 	req := &pb.CheckExistsRequest{Uid: nilUIDString}
 	_, err := s.CheckExists(context.Background(), req)
 	if err != nil {
@@ -196,7 +186,7 @@ func TestCheckExists(t *testing.T) {
 }
 
 func TestCheckExistsFail(t *testing.T) {
-	s := &Server{&mockdb{}, &mockAuth{}}
+	s := &Server{&mockdb{}}
 	req := &pb.CheckExistsRequest{Uid: ""}
 	_, err := s.CheckExists(context.Background(), req)
 	if err == nil {

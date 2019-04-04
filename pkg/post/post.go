@@ -2,7 +2,6 @@ package post
 
 import (
 	pb "github.com/andreymgn/RSOI-post/pkg/post/proto"
-	"github.com/andreymgn/RSOI/services/auth"
 	"github.com/golang/protobuf/ptypes"
 	"github.com/google/uuid"
 	"golang.org/x/net/context"
@@ -93,15 +92,6 @@ func (s *Server) GetPost(ctx context.Context, req *pb.GetPostRequest) (*pb.Singl
 
 // CreatePost creates a new post
 func (s *Server) CreatePost(ctx context.Context, req *pb.CreatePostRequest) (*pb.SinglePost, error) {
-	valid, err := s.checkToken(req.Token)
-	if err != nil {
-		return nil, err
-	}
-
-	if !valid {
-		return nil, statusInvalidToken
-	}
-
 	if req.Title == "" {
 		return nil, statusNoPostTitle
 	}
@@ -121,15 +111,6 @@ func (s *Server) CreatePost(ctx context.Context, req *pb.CreatePostRequest) (*pb
 
 // UpdatePost updates post by ID
 func (s *Server) UpdatePost(ctx context.Context, req *pb.UpdatePostRequest) (*pb.UpdatePostResponse, error) {
-	valid, err := s.checkToken(req.Token)
-	if err != nil {
-		return nil, err
-	}
-
-	if !valid {
-		return nil, statusInvalidToken
-	}
-
 	uid, err := uuid.Parse(req.Uid)
 	if err != nil {
 		return nil, statusInvalidUUID
@@ -148,15 +129,6 @@ func (s *Server) UpdatePost(ctx context.Context, req *pb.UpdatePostRequest) (*pb
 
 // DeletePost deletes post by ID
 func (s *Server) DeletePost(ctx context.Context, req *pb.DeletePostRequest) (*pb.DeletePostResponse, error) {
-	valid, err := s.checkToken(req.Token)
-	if err != nil {
-		return nil, err
-	}
-
-	if !valid {
-		return nil, statusInvalidToken
-	}
-
 	uid, err := uuid.Parse(req.Uid)
 	if err != nil {
 		return nil, statusInvalidUUID
@@ -188,24 +160,6 @@ func (s *Server) CheckExists(ctx context.Context, req *pb.CheckExistsRequest) (*
 		return res, nil
 	case errNotFound:
 		return nil, statusNotFound
-	default:
-		return nil, internalError(err)
-	}
-}
-
-// GetToken returns new authorization token
-func (s *Server) GetToken(ctx context.Context, req *pb.GetTokenRequest) (*pb.GetTokenResponse, error) {
-	appID, appSecret := req.AppId, req.AppSecret
-	token, err := s.auth.Add(appID, appSecret)
-	switch err {
-	case nil:
-		res := new(pb.GetTokenResponse)
-		res.Token = token
-		return res, nil
-	case auth.ErrNotFound:
-		return nil, statusNotFound
-	case auth.ErrWrongSecret:
-		return nil, status.Error(codes.Unauthenticated, "wrong secret")
 	default:
 		return nil, internalError(err)
 	}
