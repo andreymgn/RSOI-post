@@ -8,7 +8,6 @@ import (
 
 func main() {
 	conn := os.Getenv("CONN")
-	fmt.Println(conn)
 	port, err := strconv.Atoi(os.Getenv("PORT"))
 	if err != nil {
 		fmt.Println("PORT parse error")

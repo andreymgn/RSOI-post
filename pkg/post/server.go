@@ -2,11 +2,11 @@ package post
 
 import (
 	"fmt"
-	"log"
 	"net"
 
 	pb "github.com/andreymgn/RSOI-post/pkg/post/proto"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/credentials"
 )
 
 // Server implements posts service
@@ -26,11 +26,17 @@ func NewServer(connString string) (*Server, error) {
 
 // Start starts a server
 func (s *Server) Start(port int) error {
-	server := grpc.NewServer()
+	creds, err := credentials.NewServerTLSFromFile("/cert.pem", "/key.pem")
+	if err != nil {
+		return err
+	}
+
+	server := grpc.NewServer(grpc.Creds(creds))
 	pb.RegisterPostServer(server, s)
 	lis, err := net.Listen("tcp", fmt.Sprintf(":%d", port))
 	if err != nil {
-		log.Fatalf("failed to listen: %v", err)
+		return err
 	}
+
 	return server.Serve(lis)
 }
