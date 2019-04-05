@@ -5,6 +5,8 @@ import (
 	"net"
 
 	pb "github.com/andreymgn/RSOI-post/pkg/post/proto"
+	"github.com/grpc-ecosystem/grpc-opentracing/go/otgrpc"
+	opentracing "github.com/opentracing/opentracing-go"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
 )
@@ -25,13 +27,16 @@ func NewServer(connString string) (*Server, error) {
 }
 
 // Start starts a server
-func (s *Server) Start(port int) error {
+func (s *Server) Start(port int, tracer opentracing.Tracer) error {
 	creds, err := credentials.NewServerTLSFromFile("/cert.pem", "/key.pem")
 	if err != nil {
 		return err
 	}
 
-	server := grpc.NewServer(grpc.Creds(creds))
+	server := grpc.NewServer(
+		grpc.Creds(creds),
+		grpc.UnaryInterceptor(otgrpc.OpenTracingServerInterceptor(tracer)),
+	)
 	pb.RegisterPostServer(server, s)
 	lis, err := net.Listen("tcp", fmt.Sprintf(":%d", port))
 	if err != nil {
