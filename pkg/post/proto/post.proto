@@ -12,11 +12,15 @@ service Post {
     rpc DeletePost(DeletePostRequest) returns (DeletePostResponse);
     rpc CheckExists(CheckExistsRequest) returns (CheckExistsResponse);
     rpc GetOwner(GetOwnerRequest) returns (GetOwnerResponse);
+
+    rpc ListCategories(ListCategoriesRequest) returns (ListCategoriesResponse);
+    rpc CreateCategory(CreateCategoryRequest) returns (SingleCategory);
 }
 
 message ListPostsRequest {
-    int32 pageSize = 1;
-    int32 pageNumber = 2;
+    string categoryUid = 1;
+    int32 pageSize = 2;
+    int32 pageNumber = 3;
 }
 
 message ListPostsResponse {
@@ -32,16 +36,18 @@ message GetPostRequest {
 message SinglePost {
     string uid = 1;
     string userUid = 2;
-    string title = 3;
-    string url = 4;
-    google.protobuf.Timestamp createdAt = 5;
-    google.protobuf.Timestamp modifiedAt = 6;
+    string categoryUid = 3;
+    string title = 4;
+    string url = 5;
+    google.protobuf.Timestamp createdAt = 6;
+    google.protobuf.Timestamp modifiedAt = 7;
 }
 
 message CreatePostRequest {
     string title = 1;
     string url = 2;
     string userUid = 3;
+    string categoryUid = 4;
 }
 
 message UpdatePostRequest {
@@ -76,4 +82,26 @@ message GetOwnerRequest {
 
 message GetOwnerResponse {
     string ownerUid = 1;
+}
+
+message ListCategoriesRequest {
+    int32 pageSize = 1;
+    int32 pageNumber = 2;
+}
+
+message ListCategoriesResponse {
+    repeated SingleCategory categories = 1;
+    int32 pageSize = 2;
+    int32 pageNumber = 3;
+}
+
+message SingleCategory {
+    string uid = 1;
+    string userUid = 2;
+    string name = 3;
+}
+
+message CreateCategoryRequest {
+    string name = 1;
+    string userUid = 2;
 }

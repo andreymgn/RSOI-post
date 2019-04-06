@@ -10,10 +10,11 @@ import (
 )
 
 var (
-	statusNoPostTitle  = status.Error(codes.InvalidArgument, "post title is required")
-	statusNotFound     = status.Error(codes.NotFound, "post not found")
-	statusInvalidUUID  = status.Error(codes.InvalidArgument, "invalid UUID")
-	statusInvalidToken = status.Errorf(codes.Unauthenticated, "invalid token")
+	statusNoPostTitle    = status.Error(codes.InvalidArgument, "post title is required")
+	statusNotFound       = status.Error(codes.NotFound, "post not found")
+	statusInvalidUUID    = status.Error(codes.InvalidArgument, "invalid UUID")
+	statusInvalidToken   = status.Errorf(codes.Unauthenticated, "invalid token")
+	statusNoCategoryName = status.Error(codes.InvalidArgument, "category name is required")
 )
 
 func internalError(err error) error {
@@ -35,12 +36,23 @@ func (p *Post) SinglePost() (*pb.SinglePost, error) {
 	res := new(pb.SinglePost)
 	res.Uid = p.UID.String()
 	res.UserUid = p.UserUID.String()
+	res.CategoryUid = p.CategoryUID.String()
 	res.Title = p.Title
 	res.Url = p.URL
 	res.CreatedAt = createdAtProto
 	res.ModifiedAt = modifiedAtProto
 
 	return res, nil
+}
+
+// SingleCategory converts Category to SingleCategory
+func (c *Category) SingleCategory() *pb.SingleCategory {
+	res := new(pb.SingleCategory)
+	res.Uid = c.UID.String()
+	res.UserUid = c.UserUID.String()
+	res.Name = c.Name
+
+	return res
 }
 
 // ListPosts returns newest posts
@@ -52,7 +64,12 @@ func (s *Server) ListPosts(ctx context.Context, req *pb.ListPostsRequest) (*pb.L
 		pageSize = req.PageSize
 	}
 
-	posts, err := s.db.getAll(pageSize, req.PageNumber)
+	uid, err := uuid.Parse(req.CategoryUid)
+	if err != nil {
+		return nil, statusInvalidUUID
+	}
+
+	posts, err := s.db.getAllPosts(uid, pageSize, req.PageNumber)
 	if err != nil {
 		return nil, internalError(err)
 	}
@@ -79,7 +96,7 @@ func (s *Server) GetPost(ctx context.Context, req *pb.GetPostRequest) (*pb.Singl
 		return nil, statusInvalidUUID
 	}
 
-	post, err := s.db.getOne(uid)
+	post, err := s.db.getOnePost(uid)
 	switch err {
 	case nil:
 		return post.SinglePost()
@@ -101,7 +118,12 @@ func (s *Server) CreatePost(ctx context.Context, req *pb.CreatePostRequest) (*pb
 		return nil, statusInvalidUUID
 	}
 
-	post, err := s.db.create(req.Title, req.Url, userUID)
+	categoryUID, err := uuid.Parse(req.CategoryUid)
+	if err != nil {
+		return nil, statusInvalidUUID
+	}
+
+	post, err := s.db.createPost(req.Title, req.Url, userUID, categoryUID)
 	if err != nil {
 		return nil, internalError(err)
 	}
@@ -116,7 +138,7 @@ func (s *Server) UpdatePost(ctx context.Context, req *pb.UpdatePostRequest) (*pb
 		return nil, statusInvalidUUID
 	}
 
-	err = s.db.update(uid, req.Title, req.Url)
+	err = s.db.updatePost(uid, req.Title, req.Url)
 	switch err {
 	case nil:
 		return new(pb.UpdatePostResponse), nil
@@ -134,7 +156,7 @@ func (s *Server) DeletePost(ctx context.Context, req *pb.DeletePostRequest) (*pb
 		return nil, statusInvalidUUID
 	}
 
-	err = s.db.delete(uid)
+	err = s.db.deletePost(uid)
 	switch err {
 	case nil:
 		return new(pb.DeletePostResponse), nil
@@ -152,7 +174,7 @@ func (s *Server) CheckExists(ctx context.Context, req *pb.CheckExistsRequest) (*
 		return nil, statusInvalidUUID
 	}
 
-	result, err := s.db.checkExists(uid)
+	result, err := s.db.checkPostExists(uid)
 	switch err {
 	case nil:
 		res := new(pb.CheckExistsResponse)
@@ -172,7 +194,7 @@ func (s *Server) GetOwner(ctx context.Context, req *pb.GetOwnerRequest) (*pb.Get
 		return nil, statusInvalidUUID
 	}
 
-	result, err := s.db.getOwner(uid)
+	result, err := s.db.getPostOwner(uid)
 	switch err {
 	case nil:
 		res := new(pb.GetOwnerResponse)
@@ -183,4 +205,50 @@ func (s *Server) GetOwner(ctx context.Context, req *pb.GetOwnerRequest) (*pb.Get
 	default:
 		return nil, internalError(err)
 	}
+}
+
+// ListCategories returns categories
+func (s *Server) ListCategories(ctx context.Context, req *pb.ListCategoriesRequest) (*pb.ListCategoriesResponse, error) {
+	var pageSize int32
+	if req.PageSize == 0 {
+		pageSize = 10
+	} else {
+		pageSize = req.PageSize
+	}
+
+	categories, err := s.db.getAllCategories(pageSize, req.PageNumber)
+	if err != nil {
+		return nil, internalError(err)
+	}
+
+	res := new(pb.ListCategoriesResponse)
+	for _, category := range categories {
+		categoryResponse := category.SingleCategory()
+
+		res.Categories = append(res.Categories, categoryResponse)
+	}
+
+	res.PageSize = pageSize
+	res.PageNumber = req.PageNumber
+
+	return res, nil
+}
+
+// CreateCategory creates a new post category
+func (s *Server) CreateCategory(ctx context.Context, req *pb.CreateCategoryRequest) (*pb.SingleCategory, error) {
+	if req.Name == "" {
+		return nil, statusNoCategoryName
+	}
+
+	userUID, err := uuid.Parse(req.UserUid)
+	if err != nil {
+		return nil, statusInvalidUUID
+	}
+
+	category, err := s.db.createCategory(req.Name, userUID)
+	if err != nil {
+		return nil, internalError(err)
+	}
+
+	return category.SingleCategory(), nil
 }

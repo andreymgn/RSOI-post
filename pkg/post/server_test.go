@@ -19,39 +19,39 @@ var (
 
 type mockdb struct{}
 
-func (mdb *mockdb) getAll(pageSize, pageNumber int32) ([]*Post, error) {
+func (mdb *mockdb) getAllPosts(categoryUID uuid.UUID, pageSize, pageNumber int32) ([]*Post, error) {
 	result := make([]*Post, 0)
 	uid1 := uuid.New()
 	uid2 := uuid.New()
 	uid3 := uuid.New()
 
-	result = append(result, &Post{uid1, uid2, "First post", "google.com", time.Now(), time.Now()})
-	result = append(result, &Post{uid2, uid3, "Second post", "", time.Now(), time.Now().Add(time.Second * 10)})
-	result = append(result, &Post{uid3, uid1, "Third post", "yandex.ru", time.Now(), time.Now()})
+	result = append(result, &Post{uid1, uid2, categoryUID, "First post", "google.com", time.Now(), time.Now()})
+	result = append(result, &Post{uid2, uid3, categoryUID, "Second post", "", time.Now(), time.Now().Add(time.Second * 10)})
+	result = append(result, &Post{uid3, uid1, categoryUID, "Third post", "yandex.ru", time.Now(), time.Now()})
 	return result, nil
 }
 
-func (mdb *mockdb) getOne(uid uuid.UUID) (*Post, error) {
+func (mdb *mockdb) getOnePost(uid uuid.UUID) (*Post, error) {
 	if uid == uuid.Nil {
 		uid := uuid.New()
 
-		return &Post{uid, uid, "First post", "google.com", time.Now(), time.Now()}, nil
+		return &Post{uid, uid, uid, "First post", "google.com", time.Now(), time.Now()}, nil
 	}
 
 	return nil, errDummy
 }
 
-func (mdb *mockdb) create(title, url string, userUID uuid.UUID) (*Post, error) {
+func (mdb *mockdb) createPost(title, url string, userUID, categoryUID uuid.UUID) (*Post, error) {
 	if title == "success" {
 		uid := uuid.New()
 
-		return &Post{uid, userUID, "First post", "google.com", time.Now(), time.Now()}, nil
+		return &Post{uid, userUID, categoryUID, "First post", "google.com", time.Now(), time.Now()}, nil
 	}
 
 	return nil, errDummy
 }
 
-func (mdb *mockdb) update(uid uuid.UUID, title, url string) error {
+func (mdb *mockdb) updatePost(uid uuid.UUID, title, url string) error {
 	if uid == uuid.Nil {
 		return nil
 	}
@@ -59,7 +59,7 @@ func (mdb *mockdb) update(uid uuid.UUID, title, url string) error {
 	return errDummy
 }
 
-func (mdb *mockdb) delete(uid uuid.UUID) error {
+func (mdb *mockdb) deletePost(uid uuid.UUID) error {
 	if uid == uuid.Nil {
 		return nil
 	}
@@ -67,7 +67,7 @@ func (mdb *mockdb) delete(uid uuid.UUID) error {
 	return errDummy
 }
 
-func (mdb *mockdb) checkExists(uid uuid.UUID) (bool, error) {
+func (mdb *mockdb) checkPostExists(uid uuid.UUID) (bool, error) {
 	if uid == uuid.Nil {
 		return true, nil
 	}
@@ -75,18 +75,36 @@ func (mdb *mockdb) checkExists(uid uuid.UUID) (bool, error) {
 	return false, errDummy
 }
 
-func (mdb *mockdb) checkToken(token string) (bool, error) {
-	return true, nil
+func (mdb *mockdb) getPostOwner(uid uuid.UUID) (string, error) {
+	return nilUIDString, nil
 }
 
-func (mdb *mockdb) getOwner(uid uuid.UUID) (string, error) {
-	return nilUIDString, nil
+func (mdb *mockdb) getAllCategories(pageSize, pageNumber int32) ([]*Category, error) {
+	result := make([]*Category, 0)
+	uid1 := uuid.New()
+	uid2 := uuid.New()
+	uid3 := uuid.New()
+
+	result = append(result, &Category{uid1, uid2, "aaa"})
+	result = append(result, &Category{uid2, uid3, "bbb"})
+	result = append(result, &Category{uid3, uid1, "ccc"})
+	return result, nil
+}
+
+func (mdb *mockdb) createCategory(name string, userUID uuid.UUID) (*Category, error) {
+	if name == "success" {
+		uid := uuid.New()
+
+		return &Category{uid, userUID, name}, nil
+	}
+
+	return nil, errDummy
 }
 
 func TestListPosts(t *testing.T) {
 	s := &Server{&mockdb{}}
 	var pageSize int32 = 3
-	req := &pb.ListPostsRequest{PageSize: pageSize, PageNumber: 1}
+	req := &pb.ListPostsRequest{CategoryUid: nilUIDString, PageSize: pageSize, PageNumber: 1}
 	res, err := s.ListPosts(context.Background(), req)
 	if err != nil {
 		t.Errorf("unexpected error %v", err)
@@ -117,7 +135,7 @@ func TestGetPostFail(t *testing.T) {
 
 func TestCreatePost(t *testing.T) {
 	s := &Server{&mockdb{}}
-	req := &pb.CreatePostRequest{Title: "success", UserUid: nilUIDString}
+	req := &pb.CreatePostRequest{CategoryUid: nilUIDString, Title: "success", UserUid: nilUIDString}
 	_, err := s.CreatePost(context.Background(), req)
 	if err != nil {
 		t.Errorf("unexpected error %v", err)
