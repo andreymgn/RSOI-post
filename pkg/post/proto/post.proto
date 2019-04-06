@@ -10,8 +10,8 @@ service Post {
     rpc CreatePost(CreatePostRequest) returns (SinglePost);
     rpc UpdatePost(UpdatePostRequest) returns (UpdatePostResponse);
     rpc DeletePost(DeletePostRequest) returns (DeletePostResponse);
-    rpc CheckExists(CheckExistsRequest) returns (CheckExistsResponse);
-    rpc GetOwner(GetOwnerRequest) returns (GetOwnerResponse);
+    rpc CheckPostExists(CheckPostExistsRequest) returns (CheckPostExistsResponse);
+    rpc GetPostOwner(GetPostOwnerRequest) returns (GetPostOwnerResponse);
 
     rpc ListCategories(ListCategoriesRequest) returns (ListCategoriesResponse);
     rpc CreateCategory(CreateCategoryRequest) returns (SingleCategory);
@@ -68,19 +68,19 @@ message DeletePostResponse {
 
 }
 
-message CheckExistsRequest {
+message CheckPostExistsRequest {
     string uid = 1;
 }
 
-message CheckExistsResponse {
+message CheckPostExistsResponse {
     bool exists = 1;
 }
 
-message GetOwnerRequest {
+message GetPostOwnerRequest {
     string uid = 1;
 }
 
-message GetOwnerResponse {
+message GetPostOwnerResponse {
     string ownerUid = 1;
 }
 

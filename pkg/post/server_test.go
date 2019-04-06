@@ -194,19 +194,71 @@ func TestDeletePostFail(t *testing.T) {
 	}
 }
 
-func TestCheckExists(t *testing.T) {
+func TestCheckPostExists(t *testing.T) {
 	s := &Server{&mockdb{}}
-	req := &pb.CheckExistsRequest{Uid: nilUIDString}
-	_, err := s.CheckExists(context.Background(), req)
+	req := &pb.CheckPostExistsRequest{Uid: nilUIDString}
+	_, err := s.CheckPostExists(context.Background(), req)
 	if err != nil {
 		t.Errorf("unexpected error %v", err)
 	}
 }
 
-func TestCheckExistsFail(t *testing.T) {
+func TestCheckPostExistsFail(t *testing.T) {
 	s := &Server{&mockdb{}}
-	req := &pb.CheckExistsRequest{Uid: ""}
-	_, err := s.CheckExists(context.Background(), req)
+	req := &pb.CheckPostExistsRequest{Uid: ""}
+	_, err := s.CheckPostExists(context.Background(), req)
+	if err == nil {
+		t.Errorf("expected error, got nothing")
+	}
+}
+
+func TestGetPostOwner(t *testing.T) {
+	s := &Server{&mockdb{}}
+	req := &pb.GetPostOwnerRequest{Uid: nilUIDString}
+	_, err := s.GetPostOwner(context.Background(), req)
+	if err != nil {
+		t.Errorf("unexpected error %v", err)
+	}
+}
+
+func TestGetPostOwnerFail(t *testing.T) {
+	s := &Server{&mockdb{}}
+	req := &pb.GetPostOwnerRequest{Uid: ""}
+	_, err := s.GetPostOwner(context.Background(), req)
+	if err == nil {
+		t.Errorf("expected error, got nothing")
+	}
+}
+
+func TestListCategories(t *testing.T) {
+	s := &Server{&mockdb{}}
+	req := &pb.ListCategoriesRequest{}
+	_, err := s.ListCategories(context.Background(), req)
+	if err != nil {
+		t.Errorf("unexpected error %v", err)
+	}
+}
+
+func TestCreateCategory(t *testing.T) {
+	s := &Server{&mockdb{}}
+	req := &pb.CreateCategoryRequest{Name: "success", UserUid: nilUIDString}
+	_, err := s.CreateCategory(context.Background(), req)
+	if err != nil {
+		t.Errorf("unexpected error %v", err)
+	}
+}
+
+func TestCreateCategoryFail(t *testing.T) {
+	s := &Server{&mockdb{}}
+
+	req := &pb.CreateCategoryRequest{Name: ""}
+	_, err := s.CreateCategory(context.Background(), req)
+	if err != statusNoCategoryName {
+		t.Errorf("unexpected error %v", err)
+	}
+
+	req = &pb.CreateCategoryRequest{Name: "fail"}
+	_, err = s.CreateCategory(context.Background(), req)
 	if err == nil {
 		t.Errorf("expected error, got nothing")
 	}

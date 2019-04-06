@@ -37,7 +37,7 @@ func (m *ListPostsRequest) Reset()         { *m = ListPostsRequest{} }
 func (m *ListPostsRequest) String() string { return proto.CompactTextString(m) }
 func (*ListPostsRequest) ProtoMessage()    {}
 func (*ListPostsRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_post_906df853c86a727a, []int{0}
+	return fileDescriptor_post_ac76ec94e10ba0c9, []int{0}
 }
 func (m *ListPostsRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ListPostsRequest.Unmarshal(m, b)
@@ -91,7 +91,7 @@ func (m *ListPostsResponse) Reset()         { *m = ListPostsResponse{} }
 func (m *ListPostsResponse) String() string { return proto.CompactTextString(m) }
 func (*ListPostsResponse) ProtoMessage()    {}
 func (*ListPostsResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_post_906df853c86a727a, []int{1}
+	return fileDescriptor_post_ac76ec94e10ba0c9, []int{1}
 }
 func (m *ListPostsResponse) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ListPostsResponse.Unmarshal(m, b)
@@ -143,7 +143,7 @@ func (m *GetPostRequest) Reset()         { *m = GetPostRequest{} }
 func (m *GetPostRequest) String() string { return proto.CompactTextString(m) }
 func (*GetPostRequest) ProtoMessage()    {}
 func (*GetPostRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_post_906df853c86a727a, []int{2}
+	return fileDescriptor_post_ac76ec94e10ba0c9, []int{2}
 }
 func (m *GetPostRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_GetPostRequest.Unmarshal(m, b)
@@ -187,7 +187,7 @@ func (m *SinglePost) Reset()         { *m = SinglePost{} }
 func (m *SinglePost) String() string { return proto.CompactTextString(m) }
 func (*SinglePost) ProtoMessage()    {}
 func (*SinglePost) Descriptor() ([]byte, []int) {
-	return fileDescriptor_post_906df853c86a727a, []int{3}
+	return fileDescriptor_post_ac76ec94e10ba0c9, []int{3}
 }
 func (m *SinglePost) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_SinglePost.Unmarshal(m, b)
@@ -270,7 +270,7 @@ func (m *CreatePostRequest) Reset()         { *m = CreatePostRequest{} }
 func (m *CreatePostRequest) String() string { return proto.CompactTextString(m) }
 func (*CreatePostRequest) ProtoMessage()    {}
 func (*CreatePostRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_post_906df853c86a727a, []int{4}
+	return fileDescriptor_post_ac76ec94e10ba0c9, []int{4}
 }
 func (m *CreatePostRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CreatePostRequest.Unmarshal(m, b)
@@ -331,7 +331,7 @@ func (m *UpdatePostRequest) Reset()         { *m = UpdatePostRequest{} }
 func (m *UpdatePostRequest) String() string { return proto.CompactTextString(m) }
 func (*UpdatePostRequest) ProtoMessage()    {}
 func (*UpdatePostRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_post_906df853c86a727a, []int{5}
+	return fileDescriptor_post_ac76ec94e10ba0c9, []int{5}
 }
 func (m *UpdatePostRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_UpdatePostRequest.Unmarshal(m, b)
@@ -382,7 +382,7 @@ func (m *UpdatePostResponse) Reset()         { *m = UpdatePostResponse{} }
 func (m *UpdatePostResponse) String() string { return proto.CompactTextString(m) }
 func (*UpdatePostResponse) ProtoMessage()    {}
 func (*UpdatePostResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_post_906df853c86a727a, []int{6}
+	return fileDescriptor_post_ac76ec94e10ba0c9, []int{6}
 }
 func (m *UpdatePostResponse) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_UpdatePostResponse.Unmarshal(m, b)
@@ -413,7 +413,7 @@ func (m *DeletePostRequest) Reset()         { *m = DeletePostRequest{} }
 func (m *DeletePostRequest) String() string { return proto.CompactTextString(m) }
 func (*DeletePostRequest) ProtoMessage()    {}
 func (*DeletePostRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_post_906df853c86a727a, []int{7}
+	return fileDescriptor_post_ac76ec94e10ba0c9, []int{7}
 }
 func (m *DeletePostRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_DeletePostRequest.Unmarshal(m, b)
@@ -450,7 +450,7 @@ func (m *DeletePostResponse) Reset()         { *m = DeletePostResponse{} }
 func (m *DeletePostResponse) String() string { return proto.CompactTextString(m) }
 func (*DeletePostResponse) ProtoMessage()    {}
 func (*DeletePostResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_post_906df853c86a727a, []int{8}
+	return fileDescriptor_post_ac76ec94e10ba0c9, []int{8}
 }
 func (m *DeletePostResponse) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_DeletePostResponse.Unmarshal(m, b)
@@ -470,152 +470,152 @@ func (m *DeletePostResponse) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_DeletePostResponse proto.InternalMessageInfo
 
-type CheckExistsRequest struct {
+type CheckPostExistsRequest struct {
 	Uid                  string   `protobuf:"bytes,1,opt,name=uid,proto3" json:"uid,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *CheckExistsRequest) Reset()         { *m = CheckExistsRequest{} }
-func (m *CheckExistsRequest) String() string { return proto.CompactTextString(m) }
-func (*CheckExistsRequest) ProtoMessage()    {}
-func (*CheckExistsRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_post_906df853c86a727a, []int{9}
+func (m *CheckPostExistsRequest) Reset()         { *m = CheckPostExistsRequest{} }
+func (m *CheckPostExistsRequest) String() string { return proto.CompactTextString(m) }
+func (*CheckPostExistsRequest) ProtoMessage()    {}
+func (*CheckPostExistsRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_post_ac76ec94e10ba0c9, []int{9}
 }
-func (m *CheckExistsRequest) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_CheckExistsRequest.Unmarshal(m, b)
+func (m *CheckPostExistsRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CheckPostExistsRequest.Unmarshal(m, b)
 }
-func (m *CheckExistsRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_CheckExistsRequest.Marshal(b, m, deterministic)
+func (m *CheckPostExistsRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CheckPostExistsRequest.Marshal(b, m, deterministic)
 }
-func (dst *CheckExistsRequest) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CheckExistsRequest.Merge(dst, src)
+func (dst *CheckPostExistsRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CheckPostExistsRequest.Merge(dst, src)
 }
-func (m *CheckExistsRequest) XXX_Size() int {
-	return xxx_messageInfo_CheckExistsRequest.Size(m)
+func (m *CheckPostExistsRequest) XXX_Size() int {
+	return xxx_messageInfo_CheckPostExistsRequest.Size(m)
 }
-func (m *CheckExistsRequest) XXX_DiscardUnknown() {
-	xxx_messageInfo_CheckExistsRequest.DiscardUnknown(m)
+func (m *CheckPostExistsRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_CheckPostExistsRequest.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_CheckExistsRequest proto.InternalMessageInfo
+var xxx_messageInfo_CheckPostExistsRequest proto.InternalMessageInfo
 
-func (m *CheckExistsRequest) GetUid() string {
+func (m *CheckPostExistsRequest) GetUid() string {
 	if m != nil {
 		return m.Uid
 	}
 	return ""
 }
 
-type CheckExistsResponse struct {
+type CheckPostExistsResponse struct {
 	Exists               bool     `protobuf:"varint,1,opt,name=exists,proto3" json:"exists,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *CheckExistsResponse) Reset()         { *m = CheckExistsResponse{} }
-func (m *CheckExistsResponse) String() string { return proto.CompactTextString(m) }
-func (*CheckExistsResponse) ProtoMessage()    {}
-func (*CheckExistsResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_post_906df853c86a727a, []int{10}
+func (m *CheckPostExistsResponse) Reset()         { *m = CheckPostExistsResponse{} }
+func (m *CheckPostExistsResponse) String() string { return proto.CompactTextString(m) }
+func (*CheckPostExistsResponse) ProtoMessage()    {}
+func (*CheckPostExistsResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_post_ac76ec94e10ba0c9, []int{10}
 }
-func (m *CheckExistsResponse) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_CheckExistsResponse.Unmarshal(m, b)
+func (m *CheckPostExistsResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CheckPostExistsResponse.Unmarshal(m, b)
 }
-func (m *CheckExistsResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_CheckExistsResponse.Marshal(b, m, deterministic)
+func (m *CheckPostExistsResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CheckPostExistsResponse.Marshal(b, m, deterministic)
 }
-func (dst *CheckExistsResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CheckExistsResponse.Merge(dst, src)
+func (dst *CheckPostExistsResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CheckPostExistsResponse.Merge(dst, src)
 }
-func (m *CheckExistsResponse) XXX_Size() int {
-	return xxx_messageInfo_CheckExistsResponse.Size(m)
+func (m *CheckPostExistsResponse) XXX_Size() int {
+	return xxx_messageInfo_CheckPostExistsResponse.Size(m)
 }
-func (m *CheckExistsResponse) XXX_DiscardUnknown() {
-	xxx_messageInfo_CheckExistsResponse.DiscardUnknown(m)
+func (m *CheckPostExistsResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_CheckPostExistsResponse.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_CheckExistsResponse proto.InternalMessageInfo
+var xxx_messageInfo_CheckPostExistsResponse proto.InternalMessageInfo
 
-func (m *CheckExistsResponse) GetExists() bool {
+func (m *CheckPostExistsResponse) GetExists() bool {
 	if m != nil {
 		return m.Exists
 	}
 	return false
 }
 
-type GetOwnerRequest struct {
+type GetPostOwnerRequest struct {
 	Uid                  string   `protobuf:"bytes,1,opt,name=uid,proto3" json:"uid,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *GetOwnerRequest) Reset()         { *m = GetOwnerRequest{} }
-func (m *GetOwnerRequest) String() string { return proto.CompactTextString(m) }
-func (*GetOwnerRequest) ProtoMessage()    {}
-func (*GetOwnerRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_post_906df853c86a727a, []int{11}
+func (m *GetPostOwnerRequest) Reset()         { *m = GetPostOwnerRequest{} }
+func (m *GetPostOwnerRequest) String() string { return proto.CompactTextString(m) }
+func (*GetPostOwnerRequest) ProtoMessage()    {}
+func (*GetPostOwnerRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_post_ac76ec94e10ba0c9, []int{11}
 }
-func (m *GetOwnerRequest) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_GetOwnerRequest.Unmarshal(m, b)
+func (m *GetPostOwnerRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_GetPostOwnerRequest.Unmarshal(m, b)
 }
-func (m *GetOwnerRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_GetOwnerRequest.Marshal(b, m, deterministic)
+func (m *GetPostOwnerRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_GetPostOwnerRequest.Marshal(b, m, deterministic)
 }
-func (dst *GetOwnerRequest) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_GetOwnerRequest.Merge(dst, src)
+func (dst *GetPostOwnerRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_GetPostOwnerRequest.Merge(dst, src)
 }
-func (m *GetOwnerRequest) XXX_Size() int {
-	return xxx_messageInfo_GetOwnerRequest.Size(m)
+func (m *GetPostOwnerRequest) XXX_Size() int {
+	return xxx_messageInfo_GetPostOwnerRequest.Size(m)
 }
-func (m *GetOwnerRequest) XXX_DiscardUnknown() {
-	xxx_messageInfo_GetOwnerRequest.DiscardUnknown(m)
+func (m *GetPostOwnerRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_GetPostOwnerRequest.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_GetOwnerRequest proto.InternalMessageInfo
+var xxx_messageInfo_GetPostOwnerRequest proto.InternalMessageInfo
 
-func (m *GetOwnerRequest) GetUid() string {
+func (m *GetPostOwnerRequest) GetUid() string {
 	if m != nil {
 		return m.Uid
 	}
 	return ""
 }
 
-type GetOwnerResponse struct {
+type GetPostOwnerResponse struct {
 	OwnerUid             string   `protobuf:"bytes,1,opt,name=ownerUid,proto3" json:"ownerUid,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *GetOwnerResponse) Reset()         { *m = GetOwnerResponse{} }
-func (m *GetOwnerResponse) String() string { return proto.CompactTextString(m) }
-func (*GetOwnerResponse) ProtoMessage()    {}
-func (*GetOwnerResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_post_906df853c86a727a, []int{12}
+func (m *GetPostOwnerResponse) Reset()         { *m = GetPostOwnerResponse{} }
+func (m *GetPostOwnerResponse) String() string { return proto.CompactTextString(m) }
+func (*GetPostOwnerResponse) ProtoMessage()    {}
+func (*GetPostOwnerResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_post_ac76ec94e10ba0c9, []int{12}
 }
-func (m *GetOwnerResponse) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_GetOwnerResponse.Unmarshal(m, b)
+func (m *GetPostOwnerResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_GetPostOwnerResponse.Unmarshal(m, b)
 }
-func (m *GetOwnerResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_GetOwnerResponse.Marshal(b, m, deterministic)
+func (m *GetPostOwnerResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_GetPostOwnerResponse.Marshal(b, m, deterministic)
 }
-func (dst *GetOwnerResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_GetOwnerResponse.Merge(dst, src)
+func (dst *GetPostOwnerResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_GetPostOwnerResponse.Merge(dst, src)
 }
-func (m *GetOwnerResponse) XXX_Size() int {
-	return xxx_messageInfo_GetOwnerResponse.Size(m)
+func (m *GetPostOwnerResponse) XXX_Size() int {
+	return xxx_messageInfo_GetPostOwnerResponse.Size(m)
 }
-func (m *GetOwnerResponse) XXX_DiscardUnknown() {
-	xxx_messageInfo_GetOwnerResponse.DiscardUnknown(m)
+func (m *GetPostOwnerResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_GetPostOwnerResponse.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_GetOwnerResponse proto.InternalMessageInfo
+var xxx_messageInfo_GetPostOwnerResponse proto.InternalMessageInfo
 
-func (m *GetOwnerResponse) GetOwnerUid() string {
+func (m *GetPostOwnerResponse) GetOwnerUid() string {
 	if m != nil {
 		return m.OwnerUid
 	}
@@ -634,7 +634,7 @@ func (m *ListCategoriesRequest) Reset()         { *m = ListCategoriesRequest{} }
 func (m *ListCategoriesRequest) String() string { return proto.CompactTextString(m) }
 func (*ListCategoriesRequest) ProtoMessage()    {}
 func (*ListCategoriesRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_post_906df853c86a727a, []int{13}
+	return fileDescriptor_post_ac76ec94e10ba0c9, []int{13}
 }
 func (m *ListCategoriesRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ListCategoriesRequest.Unmarshal(m, b)
@@ -681,7 +681,7 @@ func (m *ListCategoriesResponse) Reset()         { *m = ListCategoriesResponse{}
 func (m *ListCategoriesResponse) String() string { return proto.CompactTextString(m) }
 func (*ListCategoriesResponse) ProtoMessage()    {}
 func (*ListCategoriesResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_post_906df853c86a727a, []int{14}
+	return fileDescriptor_post_ac76ec94e10ba0c9, []int{14}
 }
 func (m *ListCategoriesResponse) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ListCategoriesResponse.Unmarshal(m, b)
@@ -735,7 +735,7 @@ func (m *SingleCategory) Reset()         { *m = SingleCategory{} }
 func (m *SingleCategory) String() string { return proto.CompactTextString(m) }
 func (*SingleCategory) ProtoMessage()    {}
 func (*SingleCategory) Descriptor() ([]byte, []int) {
-	return fileDescriptor_post_906df853c86a727a, []int{15}
+	return fileDescriptor_post_ac76ec94e10ba0c9, []int{15}
 }
 func (m *SingleCategory) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_SingleCategory.Unmarshal(m, b)
@@ -788,7 +788,7 @@ func (m *CreateCategoryRequest) Reset()         { *m = CreateCategoryRequest{} }
 func (m *CreateCategoryRequest) String() string { return proto.CompactTextString(m) }
 func (*CreateCategoryRequest) ProtoMessage()    {}
 func (*CreateCategoryRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_post_906df853c86a727a, []int{16}
+	return fileDescriptor_post_ac76ec94e10ba0c9, []int{16}
 }
 func (m *CreateCategoryRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_CreateCategoryRequest.Unmarshal(m, b)
@@ -832,10 +832,10 @@ func init() {
 	proto.RegisterType((*UpdatePostResponse)(nil), "post.UpdatePostResponse")
 	proto.RegisterType((*DeletePostRequest)(nil), "post.DeletePostRequest")
 	proto.RegisterType((*DeletePostResponse)(nil), "post.DeletePostResponse")
-	proto.RegisterType((*CheckExistsRequest)(nil), "post.CheckExistsRequest")
-	proto.RegisterType((*CheckExistsResponse)(nil), "post.CheckExistsResponse")
-	proto.RegisterType((*GetOwnerRequest)(nil), "post.GetOwnerRequest")
-	proto.RegisterType((*GetOwnerResponse)(nil), "post.GetOwnerResponse")
+	proto.RegisterType((*CheckPostExistsRequest)(nil), "post.CheckPostExistsRequest")
+	proto.RegisterType((*CheckPostExistsResponse)(nil), "post.CheckPostExistsResponse")
+	proto.RegisterType((*GetPostOwnerRequest)(nil), "post.GetPostOwnerRequest")
+	proto.RegisterType((*GetPostOwnerResponse)(nil), "post.GetPostOwnerResponse")
 	proto.RegisterType((*ListCategoriesRequest)(nil), "post.ListCategoriesRequest")
 	proto.RegisterType((*ListCategoriesResponse)(nil), "post.ListCategoriesResponse")
 	proto.RegisterType((*SingleCategory)(nil), "post.SingleCategory")
@@ -859,8 +859,8 @@ type PostClient interface {
 	CreatePost(ctx context.Context, in *CreatePostRequest, opts ...grpc.CallOption) (*SinglePost, error)
 	UpdatePost(ctx context.Context, in *UpdatePostRequest, opts ...grpc.CallOption) (*UpdatePostResponse, error)
 	DeletePost(ctx context.Context, in *DeletePostRequest, opts ...grpc.CallOption) (*DeletePostResponse, error)
-	CheckExists(ctx context.Context, in *CheckExistsRequest, opts ...grpc.CallOption) (*CheckExistsResponse, error)
-	GetOwner(ctx context.Context, in *GetOwnerRequest, opts ...grpc.CallOption) (*GetOwnerResponse, error)
+	CheckPostExists(ctx context.Context, in *CheckPostExistsRequest, opts ...grpc.CallOption) (*CheckPostExistsResponse, error)
+	GetPostOwner(ctx context.Context, in *GetPostOwnerRequest, opts ...grpc.CallOption) (*GetPostOwnerResponse, error)
 	ListCategories(ctx context.Context, in *ListCategoriesRequest, opts ...grpc.CallOption) (*ListCategoriesResponse, error)
 	CreateCategory(ctx context.Context, in *CreateCategoryRequest, opts ...grpc.CallOption) (*SingleCategory, error)
 }
@@ -918,18 +918,18 @@ func (c *postClient) DeletePost(ctx context.Context, in *DeletePostRequest, opts
 	return out, nil
 }
 
-func (c *postClient) CheckExists(ctx context.Context, in *CheckExistsRequest, opts ...grpc.CallOption) (*CheckExistsResponse, error) {
-	out := new(CheckExistsResponse)
-	err := c.cc.Invoke(ctx, "/post.Post/CheckExists", in, out, opts...)
+func (c *postClient) CheckPostExists(ctx context.Context, in *CheckPostExistsRequest, opts ...grpc.CallOption) (*CheckPostExistsResponse, error) {
+	out := new(CheckPostExistsResponse)
+	err := c.cc.Invoke(ctx, "/post.Post/CheckPostExists", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *postClient) GetOwner(ctx context.Context, in *GetOwnerRequest, opts ...grpc.CallOption) (*GetOwnerResponse, error) {
-	out := new(GetOwnerResponse)
-	err := c.cc.Invoke(ctx, "/post.Post/GetOwner", in, out, opts...)
+func (c *postClient) GetPostOwner(ctx context.Context, in *GetPostOwnerRequest, opts ...grpc.CallOption) (*GetPostOwnerResponse, error) {
+	out := new(GetPostOwnerResponse)
+	err := c.cc.Invoke(ctx, "/post.Post/GetPostOwner", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -961,8 +961,8 @@ type PostServer interface {
 	CreatePost(context.Context, *CreatePostRequest) (*SinglePost, error)
 	UpdatePost(context.Context, *UpdatePostRequest) (*UpdatePostResponse, error)
 	DeletePost(context.Context, *DeletePostRequest) (*DeletePostResponse, error)
-	CheckExists(context.Context, *CheckExistsRequest) (*CheckExistsResponse, error)
-	GetOwner(context.Context, *GetOwnerRequest) (*GetOwnerResponse, error)
+	CheckPostExists(context.Context, *CheckPostExistsRequest) (*CheckPostExistsResponse, error)
+	GetPostOwner(context.Context, *GetPostOwnerRequest) (*GetPostOwnerResponse, error)
 	ListCategories(context.Context, *ListCategoriesRequest) (*ListCategoriesResponse, error)
 	CreateCategory(context.Context, *CreateCategoryRequest) (*SingleCategory, error)
 }
@@ -1061,38 +1061,38 @@ func _Post_DeletePost_Handler(srv interface{}, ctx context.Context, dec func(int
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Post_CheckExists_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CheckExistsRequest)
+func _Post_CheckPostExists_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CheckPostExistsRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PostServer).CheckExists(ctx, in)
+		return srv.(PostServer).CheckPostExists(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/post.Post/CheckExists",
+		FullMethod: "/post.Post/CheckPostExists",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PostServer).CheckExists(ctx, req.(*CheckExistsRequest))
+		return srv.(PostServer).CheckPostExists(ctx, req.(*CheckPostExistsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Post_GetOwner_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetOwnerRequest)
+func _Post_GetPostOwner_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetPostOwnerRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PostServer).GetOwner(ctx, in)
+		return srv.(PostServer).GetPostOwner(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/post.Post/GetOwner",
+		FullMethod: "/post.Post/GetPostOwner",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PostServer).GetOwner(ctx, req.(*GetOwnerRequest))
+		return srv.(PostServer).GetPostOwner(ctx, req.(*GetPostOwnerRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1158,12 +1158,12 @@ var _Post_serviceDesc = grpc.ServiceDesc{
 			Handler:    _Post_DeletePost_Handler,
 		},
 		{
-			MethodName: "CheckExists",
-			Handler:    _Post_CheckExists_Handler,
+			MethodName: "CheckPostExists",
+			Handler:    _Post_CheckPostExists_Handler,
 		},
 		{
-			MethodName: "GetOwner",
-			Handler:    _Post_GetOwner_Handler,
+			MethodName: "GetPostOwner",
+			Handler:    _Post_GetPostOwner_Handler,
 		},
 		{
 			MethodName: "ListCategories",
@@ -1178,50 +1178,50 @@ var _Post_serviceDesc = grpc.ServiceDesc{
 	Metadata: "pkg/post/proto/post.proto",
 }
 
-func init() { proto.RegisterFile("pkg/post/proto/post.proto", fileDescriptor_post_906df853c86a727a) }
+func init() { proto.RegisterFile("pkg/post/proto/post.proto", fileDescriptor_post_ac76ec94e10ba0c9) }
 
-var fileDescriptor_post_906df853c86a727a = []byte{
-	// 658 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xa4, 0x54, 0xdb, 0x6e, 0xd3, 0x40,
-	0x10, 0x95, 0x63, 0xa7, 0x4d, 0x4f, 0xa4, 0x90, 0x2e, 0x4d, 0x70, 0x0d, 0x82, 0xc8, 0x88, 0x2a,
-	0x2f, 0x38, 0x22, 0x20, 0x71, 0x11, 0x52, 0x05, 0xa1, 0xea, 0x03, 0xb7, 0xca, 0xa1, 0x1f, 0x90,
-	0xcb, 0xd6, 0x58, 0x75, 0x62, 0x63, 0x6f, 0x54, 0xca, 0x27, 0xf0, 0x5b, 0xfc, 0x14, 0x8f, 0xc8,
-	0xeb, 0xb5, 0xbd, 0xc9, 0xba, 0xad, 0x50, 0xdf, 0x76, 0xe7, 0x72, 0x66, 0xf6, 0xec, 0x9c, 0xc1,
-	0x7e, 0x74, 0xee, 0x0d, 0xa2, 0x30, 0x61, 0x83, 0x28, 0x0e, 0x59, 0xc8, 0x8f, 0x0e, 0x3f, 0x12,
-	0x23, 0x3d, 0x5b, 0x8f, 0xbc, 0x30, 0xf4, 0x02, 0x9a, 0xb9, 0xa7, 0xab, 0xb3, 0x01, 0xf3, 0x17,
-	0x34, 0x61, 0x93, 0x45, 0x94, 0x85, 0xd9, 0x11, 0xda, 0x9f, 0xfc, 0x84, 0x9d, 0x84, 0x09, 0x4b,
-	0x5c, 0xfa, 0x63, 0x45, 0x13, 0x46, 0x7a, 0x68, 0xce, 0x26, 0x8c, 0x7a, 0x61, 0x7c, 0x79, 0xea,
-	0xcf, 0x4d, 0xad, 0xa7, 0xf5, 0x77, 0x5c, 0xd9, 0x44, 0x2c, 0x34, 0xa2, 0x89, 0x47, 0xc7, 0xfe,
-	0x2f, 0x6a, 0xd6, 0x7a, 0x5a, 0xbf, 0xee, 0x16, 0x77, 0xf2, 0x10, 0x48, 0xcf, 0x5f, 0x56, 0x8b,
-	0x29, 0x8d, 0x4d, 0x9d, 0x7b, 0x25, 0x8b, 0x7d, 0x81, 0x5d, 0xa9, 0x62, 0x12, 0x85, 0xcb, 0x84,
-	0x92, 0x03, 0xd4, 0xd3, 0x7e, 0x13, 0x53, 0xeb, 0xe9, 0xfd, 0xe6, 0xb0, 0xed, 0xf0, 0x97, 0x8c,
-	0xfd, 0xa5, 0x17, 0xd0, 0x34, 0xd2, 0xcd, 0xdc, 0xb7, 0x2a, 0x6c, 0xa3, 0x75, 0x4c, 0x79, 0xdd,
-	0xfc, 0xa1, 0x6d, 0xe8, 0xab, 0xe2, 0x81, 0xe9, 0xd1, 0xfe, 0xab, 0x01, 0x65, 0x55, 0x35, 0x80,
-	0x98, 0xd8, 0x5e, 0x25, 0x34, 0x4e, 0x79, 0xa9, 0x71, 0x6b, 0x7e, 0xdd, 0x64, 0x4d, 0x57, 0x59,
-	0xdb, 0x43, 0x9d, 0xf9, 0x2c, 0xa0, 0xa6, 0xc1, 0x7d, 0xd9, 0x85, 0xd7, 0x88, 0x03, 0xb3, 0x2e,
-	0x6a, 0xc4, 0x01, 0x79, 0x85, 0x9d, 0x59, 0x4c, 0x27, 0x8c, 0xce, 0xdf, 0x31, 0x73, 0xab, 0xa7,
-	0xf5, 0x9b, 0x43, 0xcb, 0xc9, 0x3e, 0xd2, 0xc9, 0x3f, 0xd2, 0xf9, 0x96, 0x7f, 0xa4, 0x5b, 0x06,
-	0x93, 0x37, 0xc0, 0x22, 0x9c, 0xfb, 0x67, 0x3e, 0x4f, 0xdd, 0xbe, 0x31, 0x55, 0x8a, 0x4e, 0xff,
-	0x65, 0xc4, 0x81, 0x64, 0x86, 0x8a, 0x96, 0xb5, 0x8a, 0x96, 0x6b, 0x65, 0xcb, 0x12, 0x2d, 0xfa,
-	0xb5, 0xb4, 0x18, 0x0a, 0x2d, 0xf6, 0x67, 0xec, 0x9e, 0x46, 0xf3, 0x8d, 0xc2, 0x2a, 0xf3, 0x45,
-	0x2b, 0xb5, 0x8a, 0x56, 0xf4, 0xa2, 0x15, 0x7b, 0x0f, 0x44, 0x86, 0xcb, 0x06, 0xcc, 0x7e, 0x82,
-	0xdd, 0x0f, 0x34, 0xa0, 0x37, 0x14, 0x49, 0x93, 0xe5, 0x30, 0x91, 0x7c, 0x00, 0x32, 0xfa, 0x4e,
-	0x67, 0xe7, 0x47, 0x3f, 0x7d, 0x49, 0x26, 0x6a, 0xf6, 0x53, 0xdc, 0x5d, 0x8b, 0x13, 0xc3, 0xdd,
-	0xc5, 0x16, 0xe5, 0x16, 0x1e, 0xdb, 0x70, 0xc5, 0xcd, 0x7e, 0x8c, 0x3b, 0xc7, 0x94, 0x7d, 0xbd,
-	0x58, 0xd2, 0xf8, 0x6a, 0x4c, 0x07, 0xed, 0x32, 0x48, 0x00, 0x5a, 0x68, 0x84, 0xa9, 0xa1, 0x54,
-	0x67, 0x71, 0xb7, 0xc7, 0xe8, 0xa4, 0xf2, 0x1a, 0x65, 0x04, 0xfb, 0xb4, 0x68, 0x57, 0x96, 0x8e,
-	0x76, 0xad, 0x74, 0x6a, 0x8a, 0x74, 0x7e, 0x6b, 0xe8, 0x6e, 0xa2, 0x8a, 0x5e, 0x5e, 0x00, 0xb3,
-	0xc2, 0x2a, 0xe4, 0xbb, 0x27, 0xcb, 0x57, 0xe4, 0x5c, 0xba, 0x52, 0xdc, 0xad, 0x74, 0x7c, 0x82,
-	0xd6, 0x3a, 0xf2, 0x7f, 0xc9, 0x94, 0xc0, 0x58, 0x4e, 0x16, 0x54, 0x4c, 0x0c, 0x3f, 0xdb, 0x47,
-	0xe8, 0x64, 0xa3, 0x5f, 0xf4, 0x2a, 0x38, 0xcb, 0x83, 0xb5, 0x32, 0xf8, 0x6a, 0xe8, 0xe1, 0x1f,
-	0x03, 0x06, 0x5f, 0x1b, 0x6f, 0xb1, 0x53, 0xac, 0x38, 0xd2, 0xcd, 0xc8, 0xd8, 0xdc, 0xb2, 0xd6,
-	0x3d, 0xc5, 0x2e, 0x18, 0x7d, 0x86, 0x6d, 0xb1, 0xa7, 0x88, 0x20, 0x72, 0x7d, 0x6d, 0x59, 0xca,
-	0x76, 0x24, 0x2f, 0x81, 0x52, 0xbb, 0x44, 0x20, 0x2b, 0x6a, 0xae, 0x48, 0x3c, 0x04, 0x4a, 0xb1,
-	0xe4, 0x89, 0x8a, 0x1a, 0x2d, 0x53, 0x75, 0x88, 0x66, 0x0f, 0x81, 0x52, 0x30, 0x39, 0x80, 0xa2,
-	0xb4, 0x1c, 0x40, 0xd5, 0x16, 0x79, 0x8f, 0xa6, 0xa4, 0x19, 0x22, 0x02, 0x55, 0xb9, 0x59, 0xfb,
-	0x15, 0x1e, 0x81, 0xf1, 0x1a, 0x8d, 0x5c, 0x23, 0xa4, 0x53, 0x50, 0x26, 0x0b, 0xcb, 0xea, 0x6e,
-	0x9a, 0x45, 0xea, 0x47, 0xb4, 0xd6, 0x07, 0x9b, 0xdc, 0x2f, 0xff, 0x45, 0x11, 0x91, 0xf5, 0xa0,
-	0xda, 0x29, 0xc0, 0x46, 0x68, 0xad, 0xcf, 0x51, 0x0e, 0x56, 0x39, 0x5d, 0x56, 0xa5, 0x4c, 0xa6,
-	0x5b, 0x7c, 0x4f, 0x3f, 0xff, 0x17, 0x00, 0x00, 0xff, 0xff, 0x91, 0x03, 0x42, 0x62, 0xdc, 0x07,
-	0x00, 0x00,
+var fileDescriptor_post_ac76ec94e10ba0c9 = []byte{
+	// 663 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xa4, 0x54, 0xdd, 0x6e, 0xd3, 0x30,
+	0x14, 0x56, 0x9a, 0x74, 0x3f, 0xdf, 0x50, 0xd9, 0x4c, 0xd7, 0x65, 0x66, 0x40, 0x15, 0x09, 0xa8,
+	0xb8, 0xe8, 0xb4, 0x82, 0x04, 0x42, 0x48, 0x13, 0x2a, 0x13, 0x17, 0xc0, 0x98, 0x32, 0xf6, 0x00,
+	0x5d, 0xeb, 0x85, 0x68, 0x69, 0x13, 0x12, 0x57, 0x63, 0x3c, 0x02, 0xaf, 0xc8, 0x8b, 0x70, 0x89,
+	0xe2, 0x38, 0x89, 0x53, 0xa7, 0x9b, 0xd0, 0xee, 0xec, 0xf3, 0xf3, 0x9d, 0xe3, 0xcf, 0xe7, 0x3b,
+	0xd8, 0x8d, 0x2e, 0xbd, 0xfd, 0x28, 0x4c, 0xf8, 0x7e, 0x14, 0x87, 0x3c, 0x14, 0xc7, 0xbe, 0x38,
+	0x12, 0x2b, 0x3d, 0xd3, 0x27, 0x5e, 0x18, 0x7a, 0x01, 0xcb, 0xdc, 0xe7, 0xf3, 0x8b, 0x7d, 0xee,
+	0x4f, 0x59, 0xc2, 0x47, 0xd3, 0x28, 0x0b, 0x73, 0x22, 0x6c, 0x7e, 0xf6, 0x13, 0x7e, 0x12, 0x26,
+	0x3c, 0x71, 0xd9, 0x8f, 0x39, 0x4b, 0x38, 0xe9, 0x62, 0x63, 0x3c, 0xe2, 0xcc, 0x0b, 0xe3, 0xeb,
+	0x33, 0x7f, 0x62, 0x1b, 0x5d, 0xa3, 0xb7, 0xee, 0xaa, 0x26, 0x42, 0xb1, 0x16, 0x8d, 0x3c, 0x76,
+	0xea, 0xff, 0x62, 0x76, 0xa3, 0x6b, 0xf4, 0x9a, 0x6e, 0x71, 0x27, 0x8f, 0x81, 0xf4, 0x7c, 0x3c,
+	0x9f, 0x9e, 0xb3, 0xd8, 0x36, 0x85, 0x57, 0xb1, 0x38, 0x57, 0xd8, 0x52, 0x2a, 0x26, 0x51, 0x38,
+	0x4b, 0x18, 0x79, 0x86, 0x66, 0xda, 0x6f, 0x62, 0x1b, 0x5d, 0xb3, 0xb7, 0x31, 0xd8, 0xec, 0x8b,
+	0x97, 0x9c, 0xfa, 0x33, 0x2f, 0x60, 0x69, 0xa4, 0x9b, 0xb9, 0xef, 0x54, 0xd8, 0x41, 0xeb, 0x23,
+	0x13, 0x75, 0xf3, 0x87, 0x6e, 0xc2, 0x9c, 0x17, 0x0f, 0x4c, 0x8f, 0xce, 0x5f, 0x03, 0x28, 0xab,
+	0xea, 0x01, 0xc4, 0xc6, 0xea, 0x3c, 0x61, 0x71, 0xca, 0x4b, 0x43, 0x58, 0xf3, 0xeb, 0x22, 0x6b,
+	0xa6, 0xce, 0x5a, 0x1b, 0x4d, 0xee, 0xf3, 0x80, 0xd9, 0x96, 0xf0, 0x65, 0x17, 0x51, 0x23, 0x0e,
+	0xec, 0xa6, 0xac, 0x11, 0x07, 0xe4, 0x0d, 0xd6, 0xc7, 0x31, 0x1b, 0x71, 0x36, 0x79, 0xcf, 0xed,
+	0x95, 0xae, 0xd1, 0xdb, 0x18, 0xd0, 0x7e, 0xf6, 0x91, 0xfd, 0xfc, 0x23, 0xfb, 0xdf, 0xf2, 0x8f,
+	0x74, 0xcb, 0x60, 0xf2, 0x16, 0x98, 0x86, 0x13, 0xff, 0xc2, 0x17, 0xa9, 0xab, 0xb7, 0xa6, 0x2a,
+	0xd1, 0xe9, 0xbf, 0x0c, 0x05, 0x90, 0xca, 0x50, 0xd1, 0xb2, 0x51, 0xd3, 0x72, 0xa3, 0x6c, 0x59,
+	0xa1, 0xc5, 0xbc, 0x91, 0x16, 0x4b, 0xa3, 0xc5, 0xf9, 0x82, 0xad, 0xb3, 0x68, 0xb2, 0x50, 0x58,
+	0x67, 0xbe, 0x68, 0xa5, 0x51, 0xd3, 0x8a, 0x59, 0xb4, 0xe2, 0xb4, 0x41, 0x54, 0xb8, 0x6c, 0xc0,
+	0x9c, 0xa7, 0xd8, 0xfa, 0xc0, 0x02, 0x76, 0x4b, 0x91, 0x34, 0x59, 0x0d, 0x93, 0xc9, 0x2f, 0xd0,
+	0x19, 0x7e, 0x67, 0xe3, 0xcb, 0xd4, 0x78, 0xf4, 0xd3, 0x57, 0xa4, 0xa2, 0x23, 0x1c, 0x60, 0x47,
+	0x8b, 0x95, 0x43, 0xde, 0xc1, 0x0a, 0x13, 0x16, 0x11, 0xbf, 0xe6, 0xca, 0x9b, 0xf3, 0x1c, 0x0f,
+	0xe4, 0x60, 0x7e, 0xbd, 0x9a, 0xb1, 0x78, 0x39, 0xf6, 0x00, 0xed, 0x6a, 0xa0, 0x04, 0xa6, 0x58,
+	0x0b, 0x53, 0x43, 0xa9, 0xd6, 0xe2, 0xee, 0x9c, 0x62, 0x3b, 0x95, 0xdb, 0x30, 0x23, 0xdc, 0x67,
+	0x45, 0xeb, 0xaa, 0x94, 0x8c, 0x1b, 0xa5, 0xd4, 0xd0, 0xa4, 0xf4, 0xdb, 0x40, 0x67, 0x11, 0x55,
+	0xf6, 0xf2, 0x0a, 0x18, 0x17, 0x56, 0x29, 0xe7, 0xb6, 0x2a, 0x67, 0x99, 0x73, 0xed, 0x2a, 0x71,
+	0x77, 0xd2, 0xf5, 0x09, 0x5a, 0x55, 0xe4, 0xff, 0x92, 0x2d, 0x81, 0x35, 0x1b, 0x4d, 0x99, 0x9c,
+	0x20, 0x71, 0x76, 0x8e, 0xb0, 0x9d, 0x49, 0xa1, 0xe8, 0x55, 0x72, 0x96, 0x07, 0x1b, 0x65, 0xf0,
+	0x72, 0xe8, 0xc1, 0x1f, 0x0b, 0x96, 0x58, 0x23, 0xef, 0xb0, 0x5e, 0xac, 0x3c, 0xd2, 0xc9, 0xc8,
+	0x58, 0xdc, 0xba, 0x74, 0x47, 0xb3, 0x4b, 0x46, 0x0f, 0xb0, 0x2a, 0x7f, 0x9d, 0x48, 0x22, 0xab,
+	0x6b, 0x8c, 0x6a, 0xdb, 0x92, 0xbc, 0x06, 0x4a, 0x2d, 0x13, 0x89, 0xac, 0xa9, 0xbb, 0x26, 0xf1,
+	0x10, 0x28, 0xc5, 0x93, 0x27, 0x6a, 0xea, 0xa4, 0xb6, 0xee, 0x90, 0xcd, 0x1e, 0x02, 0xa5, 0x80,
+	0x72, 0x00, 0x4d, 0x79, 0x39, 0x80, 0xae, 0x35, 0x72, 0x8c, 0xfb, 0x0b, 0xfa, 0x21, 0x7b, 0xb2,
+	0xff, 0x5a, 0x09, 0xd2, 0x47, 0x4b, 0xbc, 0x12, 0xef, 0x08, 0xf7, 0x54, 0xcd, 0x90, 0xdd, 0x0a,
+	0x85, 0xaa, 0xe0, 0x28, 0xad, 0x73, 0x49, 0x98, 0x4f, 0x68, 0x55, 0x07, 0x9e, 0x3c, 0x2c, 0xff,
+	0x4b, 0x13, 0x17, 0xdd, 0xab, 0x77, 0x4a, 0xb0, 0x21, 0x5a, 0xd5, 0xf9, 0xca, 0xc1, 0x6a, 0xa7,
+	0x8e, 0xd6, 0xca, 0xe7, 0x7c, 0x45, 0xec, 0xf3, 0x97, 0xff, 0x02, 0x00, 0x00, 0xff, 0xff, 0x63,
+	0x37, 0x7f, 0x7f, 0x04, 0x08, 0x00, 0x00,
 }

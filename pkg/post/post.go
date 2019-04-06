@@ -167,8 +167,8 @@ func (s *Server) DeletePost(ctx context.Context, req *pb.DeletePostRequest) (*pb
 	}
 }
 
-// CheckExists checks if post with ID exists in DB
-func (s *Server) CheckExists(ctx context.Context, req *pb.CheckExistsRequest) (*pb.CheckExistsResponse, error) {
+// CheckPostExists checks if post with ID exists in DB
+func (s *Server) CheckPostExists(ctx context.Context, req *pb.CheckPostExistsRequest) (*pb.CheckPostExistsResponse, error) {
 	uid, err := uuid.Parse(req.Uid)
 	if err != nil {
 		return nil, statusInvalidUUID
@@ -177,7 +177,7 @@ func (s *Server) CheckExists(ctx context.Context, req *pb.CheckExistsRequest) (*
 	result, err := s.db.checkPostExists(uid)
 	switch err {
 	case nil:
-		res := new(pb.CheckExistsResponse)
+		res := new(pb.CheckPostExistsResponse)
 		res.Exists = result
 		return res, nil
 	case errNotFound:
@@ -187,8 +187,8 @@ func (s *Server) CheckExists(ctx context.Context, req *pb.CheckExistsRequest) (*
 	}
 }
 
-// GetOwner returns post owner
-func (s *Server) GetOwner(ctx context.Context, req *pb.GetOwnerRequest) (*pb.GetOwnerResponse, error) {
+// GetPostOwner returns post owner
+func (s *Server) GetPostOwner(ctx context.Context, req *pb.GetPostOwnerRequest) (*pb.GetPostOwnerResponse, error) {
 	uid, err := uuid.Parse(req.Uid)
 	if err != nil {
 		return nil, statusInvalidUUID
@@ -197,7 +197,7 @@ func (s *Server) GetOwner(ctx context.Context, req *pb.GetOwnerRequest) (*pb.Get
 	result, err := s.db.getPostOwner(uid)
 	switch err {
 	case nil:
-		res := new(pb.GetOwnerResponse)
+		res := new(pb.GetPostOwnerResponse)
 		res.OwnerUid = result
 		return res, nil
 	case errNotFound:
