@@ -210,7 +210,7 @@ func (db *db) getPostOwner(uid uuid.UUID) (string, error) {
 }
 
 func (db *db) getAllCategories(pageSize, pageNumber int32) ([]*Category, error) {
-	query := "SELECT uid, user_uid, name FROM categories WHERE uid=$1 LIMIT $2 OFFSET $3"
+	query := "SELECT uid, user_uid, name FROM categories LIMIT $1 OFFSET $2"
 	lastRecord := pageNumber * pageSize
 	rows, err := db.Query(query, pageSize, lastRecord)
 	if err != nil {
