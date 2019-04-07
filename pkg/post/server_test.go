@@ -91,6 +91,10 @@ func (mdb *mockdb) getAllCategories(pageSize, pageNumber int32) ([]*Category, er
 	return result, nil
 }
 
+func (mdb *mockdb) getCategoryAdminByPost(uid uuid.UUID) (string, error) {
+	return nilUIDString, nil
+}
+
 func (mdb *mockdb) createCategory(name string, userUID uuid.UUID) (*Category, error) {
 	if name == "success" {
 		uid := uuid.New()
@@ -259,6 +263,24 @@ func TestCreateCategoryFail(t *testing.T) {
 
 	req = &pb.CreateCategoryRequest{Name: "fail"}
 	_, err = s.CreateCategory(context.Background(), req)
+	if err == nil {
+		t.Errorf("expected error, got nothing")
+	}
+}
+
+func TestGetCategoryAdminByPost(t *testing.T) {
+	s := &Server{&mockdb{}}
+	req := &pb.GetCategoryAdminByPostRequest{PostUid: nilUIDString}
+	_, err := s.GetCategoryAdminByPost(context.Background(), req)
+	if err != nil {
+		t.Errorf("unexpected error %v", err)
+	}
+}
+
+func TestGetCategoryAdminByPostFail(t *testing.T) {
+	s := &Server{&mockdb{}}
+	req := &pb.GetCategoryAdminByPostRequest{PostUid: ""}
+	_, err := s.GetCategoryAdminByPost(context.Background(), req)
 	if err == nil {
 		t.Errorf("expected error, got nothing")
 	}

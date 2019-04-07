@@ -14,6 +14,7 @@ service Post {
     rpc GetPostOwner(GetPostOwnerRequest) returns (GetPostOwnerResponse);
 
     rpc ListCategories(ListCategoriesRequest) returns (ListCategoriesResponse);
+    rpc GetCategoryAdminByPost(GetCategoryAdminByPostRequest) returns (GetCategoryAdminByPostResponse);
     rpc CreateCategory(CreateCategoryRequest) returns (SingleCategory);
 }
 
@@ -104,4 +105,12 @@ message SingleCategory {
 message CreateCategoryRequest {
     string name = 1;
     string userUid = 2;
+}
+
+message GetCategoryAdminByPostRequest {
+    string postUid = 1;
+}
+
+message GetCategoryAdminByPostResponse {
+    string ownerUid = 1;
 }

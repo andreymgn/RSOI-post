@@ -41,6 +41,7 @@ type datastore interface {
 	checkPostExists(uuid.UUID) (bool, error)
 	getPostOwner(uuid.UUID) (string, error)
 	getAllCategories(int32, int32) ([]*Category, error)
+	getCategoryAdminByPost(uuid.UUID) (string, error)
 	createCategory(string, uuid.UUID) (*Category, error)
 }
 
@@ -245,6 +246,22 @@ func (db *db) getAllCategories(pageSize, pageNumber int32) ([]*Category, error) 
 	}
 
 	return result, nil
+}
+
+func (db *db) getCategoryAdminByPost(uid uuid.UUID) (string, error) {
+	query := `SELECT categories.user_uid
+			  FROM categories JOIN posts ON categories.uid = posts.category_uid 
+			  WHERE posts.uid=$1`
+	row := db.QueryRow(query, uid.String())
+	var result string
+	switch err := row.Scan(&result); err {
+	case nil:
+		return result, nil
+	case sql.ErrNoRows:
+		return "", errNotFound
+	default:
+		return "", err
+	}
 }
 
 func (db *db) createCategory(name string, userUID uuid.UUID) (*Category, error) {

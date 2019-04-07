@@ -234,6 +234,26 @@ func (s *Server) ListCategories(ctx context.Context, req *pb.ListCategoriesReque
 	return res, nil
 }
 
+// GetCategoryAdmin returns admin of category
+func (s *Server) GetCategoryAdminByPost(ctx context.Context, req *pb.GetCategoryAdminByPostRequest) (*pb.GetCategoryAdminByPostResponse, error) {
+	uid, err := uuid.Parse(req.PostUid)
+	if err != nil {
+		return nil, statusInvalidUUID
+	}
+
+	result, err := s.db.getCategoryAdminByPost(uid)
+	switch err {
+	case nil:
+		res := new(pb.GetCategoryAdminByPostResponse)
+		res.OwnerUid = result
+		return res, nil
+	case errNotFound:
+		return nil, statusNotFound
+	default:
+		return nil, internalError(err)
+	}
+}
+
 // CreateCategory creates a new post category
 func (s *Server) CreateCategory(ctx context.Context, req *pb.CreateCategoryRequest) (*pb.SingleCategory, error) {
 	if req.Name == "" {
