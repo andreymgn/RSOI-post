@@ -79,32 +79,6 @@ func (mdb *mockdb) getPostOwner(uid uuid.UUID) (string, error) {
 	return nilUIDString, nil
 }
 
-func (mdb *mockdb) getAllCategories(pageSize, pageNumber int32) ([]*Category, error) {
-	result := make([]*Category, 0)
-	uid1 := uuid.New()
-	uid2 := uuid.New()
-	uid3 := uuid.New()
-
-	result = append(result, &Category{uid1, uid2, "aaa"})
-	result = append(result, &Category{uid2, uid3, "bbb"})
-	result = append(result, &Category{uid3, uid1, "ccc"})
-	return result, nil
-}
-
-func (mdb *mockdb) getCategoryAdminByPost(uid uuid.UUID) (string, error) {
-	return nilUIDString, nil
-}
-
-func (mdb *mockdb) createCategory(name string, userUID uuid.UUID) (*Category, error) {
-	if name == "success" {
-		uid := uuid.New()
-
-		return &Category{uid, userUID, name}, nil
-	}
-
-	return nil, errDummy
-}
-
 func TestListPosts(t *testing.T) {
 	s := &Server{&mockdb{}}
 	var pageSize int32 = 3
@@ -229,58 +203,6 @@ func TestGetPostOwnerFail(t *testing.T) {
 	s := &Server{&mockdb{}}
 	req := &pb.GetPostOwnerRequest{Uid: ""}
 	_, err := s.GetPostOwner(context.Background(), req)
-	if err == nil {
-		t.Errorf("expected error, got nothing")
-	}
-}
-
-func TestListCategories(t *testing.T) {
-	s := &Server{&mockdb{}}
-	req := &pb.ListCategoriesRequest{}
-	_, err := s.ListCategories(context.Background(), req)
-	if err != nil {
-		t.Errorf("unexpected error %v", err)
-	}
-}
-
-func TestCreateCategory(t *testing.T) {
-	s := &Server{&mockdb{}}
-	req := &pb.CreateCategoryRequest{Name: "success", UserUid: nilUIDString}
-	_, err := s.CreateCategory(context.Background(), req)
-	if err != nil {
-		t.Errorf("unexpected error %v", err)
-	}
-}
-
-func TestCreateCategoryFail(t *testing.T) {
-	s := &Server{&mockdb{}}
-
-	req := &pb.CreateCategoryRequest{Name: ""}
-	_, err := s.CreateCategory(context.Background(), req)
-	if err != statusNoCategoryName {
-		t.Errorf("unexpected error %v", err)
-	}
-
-	req = &pb.CreateCategoryRequest{Name: "fail"}
-	_, err = s.CreateCategory(context.Background(), req)
-	if err == nil {
-		t.Errorf("expected error, got nothing")
-	}
-}
-
-func TestGetCategoryAdminByPost(t *testing.T) {
-	s := &Server{&mockdb{}}
-	req := &pb.GetCategoryAdminByPostRequest{PostUid: nilUIDString}
-	_, err := s.GetCategoryAdminByPost(context.Background(), req)
-	if err != nil {
-		t.Errorf("unexpected error %v", err)
-	}
-}
-
-func TestGetCategoryAdminByPostFail(t *testing.T) {
-	s := &Server{&mockdb{}}
-	req := &pb.GetCategoryAdminByPostRequest{PostUid: ""}
-	_, err := s.GetCategoryAdminByPost(context.Background(), req)
 	if err == nil {
 		t.Errorf("expected error, got nothing")
 	}

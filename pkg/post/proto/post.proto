@@ -12,10 +12,6 @@ service Post {
     rpc DeletePost(DeletePostRequest) returns (DeletePostResponse);
     rpc CheckPostExists(CheckPostExistsRequest) returns (CheckPostExistsResponse);
     rpc GetPostOwner(GetPostOwnerRequest) returns (GetPostOwnerResponse);
-
-    rpc ListCategories(ListCategoriesRequest) returns (ListCategoriesResponse);
-    rpc GetCategoryAdminByPost(GetCategoryAdminByPostRequest) returns (GetCategoryAdminByPostResponse);
-    rpc CreateCategory(CreateCategoryRequest) returns (SingleCategory);
 }
 
 message ListPostsRequest {
@@ -82,35 +78,5 @@ message GetPostOwnerRequest {
 }
 
 message GetPostOwnerResponse {
-    string ownerUid = 1;
-}
-
-message ListCategoriesRequest {
-    int32 pageSize = 1;
-    int32 pageNumber = 2;
-}
-
-message ListCategoriesResponse {
-    repeated SingleCategory categories = 1;
-    int32 pageSize = 2;
-    int32 pageNumber = 3;
-}
-
-message SingleCategory {
-    string uid = 1;
-    string userUid = 2;
-    string name = 3;
-}
-
-message CreateCategoryRequest {
-    string name = 1;
-    string userUid = 2;
-}
-
-message GetCategoryAdminByPostRequest {
-    string postUid = 1;
-}
-
-message GetCategoryAdminByPostResponse {
     string ownerUid = 1;
 }

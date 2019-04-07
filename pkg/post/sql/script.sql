@@ -9,13 +9,3 @@ CREATE TABLE posts (
     created_at TIMESTAMP WITH TIME ZONE NOT NULL,
     modified_at TIMESTAMP WITH TIME ZONE NOT NULL
 );
-
-CREATE TABLE categories (
-    uid UUID PRIMARY KEY,
-    user_uid UUID NOT NULL,
-    name VARCHAR(80) NOT NULL
-);
-
-ALTER TABLE posts
-  ADD CONSTRAINT post_category_fk FOREIGN KEY (category_uid)
-      REFERENCES categories(uid);
