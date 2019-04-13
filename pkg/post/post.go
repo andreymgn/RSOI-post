@@ -43,8 +43,37 @@ func (p *Post) SinglePost() (*pb.SinglePost, error) {
 	return res, nil
 }
 
-// ListPosts returns newest posts
+// ListPostsByCategory returns newest posts in category
 func (s *Server) ListPosts(ctx context.Context, req *pb.ListPostsRequest) (*pb.ListPostsResponse, error) {
+	var pageSize int32
+	if req.PageSize == 0 {
+		pageSize = 10
+	} else {
+		pageSize = req.PageSize
+	}
+
+	posts, err := s.db.getAllPosts(pageSize, req.PageNumber)
+	if err != nil {
+		return nil, internalError(err)
+	}
+	res := new(pb.ListPostsResponse)
+	for _, post := range posts {
+		postResponse, err := post.SinglePost()
+		if err != nil {
+			return nil, err
+		}
+
+		res.Posts = append(res.Posts, postResponse)
+	}
+
+	res.PageSize = pageSize
+	res.PageNumber = req.PageNumber
+
+	return res, nil
+}
+
+// ListPostsByCategory returns newest posts in category
+func (s *Server) ListPostsByCategory(ctx context.Context, req *pb.ListPostsByCategoryRequest) (*pb.ListPostsResponse, error) {
 	var pageSize int32
 	if req.PageSize == 0 {
 		pageSize = 10
@@ -57,7 +86,7 @@ func (s *Server) ListPosts(ctx context.Context, req *pb.ListPostsRequest) (*pb.L
 		return nil, statusInvalidUUID
 	}
 
-	posts, err := s.db.getAllPosts(uid, pageSize, req.PageNumber)
+	posts, err := s.db.getAllPostsByCategory(uid, pageSize, req.PageNumber)
 	if err != nil {
 		return nil, internalError(err)
 	}

@@ -6,6 +6,7 @@ package post;
 
 service Post {
     rpc ListPosts(ListPostsRequest) returns (ListPostsResponse);
+    rpc ListPostsByCategory(ListPostsByCategoryRequest) returns (ListPostsResponse);
     rpc GetPost(GetPostRequest) returns (SinglePost);
     rpc CreatePost(CreatePostRequest) returns (SinglePost);
     rpc UpdatePost(UpdatePostRequest) returns (UpdatePostResponse);
@@ -15,6 +16,11 @@ service Post {
 }
 
 message ListPostsRequest {
+    int32 pageSize = 1;
+    int32 pageNumber = 2;
+}
+
+message ListPostsByCategoryRequest {
     string categoryUid = 1;
     int32 pageSize = 2;
     int32 pageNumber = 3;

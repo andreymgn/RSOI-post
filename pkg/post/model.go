@@ -26,7 +26,8 @@ type Post struct {
 }
 
 type datastore interface {
-	getAllPosts(uuid.UUID, int32, int32) ([]*Post, error)
+	getAllPosts(int32, int32) ([]*Post, error)
+	getAllPostsByCategory(uuid.UUID, int32, int32) ([]*Post, error)
 	getOnePost(uuid.UUID) (*Post, error)
 	createPost(string, string, uuid.UUID, uuid.UUID) (*Post, error)
 	updatePost(uuid.UUID, string, string) error
@@ -44,7 +45,50 @@ func newDB(connString string) (*db, error) {
 	return &db{postgres}, err
 }
 
-func (db *db) getAllPosts(categoryUID uuid.UUID, pageSize, pageNumber int32) ([]*Post, error) {
+func (db *db) getAllPosts(pageSize, pageNumber int32) ([]*Post, error) {
+	query := "SELECT uid, user_uid, category_uid, title, url, created_at, modified_at FROM posts ORDER BY created_at DESC LIMIT $1 OFFSET $2"
+	lastRecord := pageNumber * pageSize
+	rows, err := db.Query(query, pageSize, lastRecord)
+	if err != nil {
+		return nil, err
+	}
+
+	defer rows.Close()
+	result := make([]*Post, 0)
+	for rows.Next() {
+		post := new(Post)
+		var uid, userUID, categoryUID string
+		err := rows.Scan(&uid, &userUID, &categoryUID, &post.Title, &post.URL, &post.CreatedAt, &post.ModifiedAt)
+		if err != nil {
+			return nil, err
+		}
+
+		post.UID, err = uuid.Parse(uid)
+		if err != nil {
+			return nil, err
+		}
+
+		post.UserUID, err = uuid.Parse(userUID)
+		if err != nil {
+			return nil, err
+		}
+
+		post.CategoryUID, err = uuid.Parse(categoryUID)
+		if err != nil {
+			return nil, err
+		}
+
+		result = append(result, post)
+	}
+
+	if err = rows.Err(); err != nil {
+		return nil, err
+	}
+
+	return result, nil
+}
+
+func (db *db) getAllPostsByCategory(categoryUID uuid.UUID, pageSize, pageNumber int32) ([]*Post, error) {
 	query := "SELECT uid, user_uid, title, url, created_at, modified_at FROM posts WHERE category_uid=$1 ORDER BY created_at DESC LIMIT $2 OFFSET $3"
 	lastRecord := pageNumber * pageSize
 	rows, err := db.Query(query, categoryUID.String(), pageSize, lastRecord)

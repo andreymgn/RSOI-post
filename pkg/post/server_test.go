@@ -19,7 +19,19 @@ var (
 
 type mockdb struct{}
 
-func (mdb *mockdb) getAllPosts(categoryUID uuid.UUID, pageSize, pageNumber int32) ([]*Post, error) {
+func (mdb *mockdb) getAllPosts(pageSize, pageNumber int32) ([]*Post, error) {
+	result := make([]*Post, 0)
+	uid1 := uuid.New()
+	uid2 := uuid.New()
+	uid3 := uuid.New()
+
+	result = append(result, &Post{uid1, uid2, uid3, "First post", "google.com", time.Now(), time.Now()})
+	result = append(result, &Post{uid2, uid3, uid3, "Second post", "", time.Now(), time.Now().Add(time.Second * 10)})
+	result = append(result, &Post{uid3, uid1, uid1, "Third post", "yandex.ru", time.Now(), time.Now()})
+	return result, nil
+}
+
+func (mdb *mockdb) getAllPostsByCategory(categoryUID uuid.UUID, pageSize, pageNumber int32) ([]*Post, error) {
 	result := make([]*Post, 0)
 	uid1 := uuid.New()
 	uid2 := uuid.New()
@@ -82,8 +94,22 @@ func (mdb *mockdb) getPostOwner(uid uuid.UUID) (string, error) {
 func TestListPosts(t *testing.T) {
 	s := &Server{&mockdb{}}
 	var pageSize int32 = 3
-	req := &pb.ListPostsRequest{CategoryUid: nilUIDString, PageSize: pageSize, PageNumber: 1}
+	req := &pb.ListPostsRequest{PageSize: pageSize, PageNumber: 1}
 	res, err := s.ListPosts(context.Background(), req)
+	if err != nil {
+		t.Errorf("unexpected error %v", err)
+	}
+
+	if len(res.Posts) != int(pageSize) {
+		t.Errorf("unexpected number of posts: got %v want %v", len(res.Posts), pageSize)
+	}
+}
+
+func TestListPostsByCategory(t *testing.T) {
+	s := &Server{&mockdb{}}
+	var pageSize int32 = 3
+	req := &pb.ListPostsByCategoryRequest{CategoryUid: nilUIDString, PageSize: pageSize, PageNumber: 1}
+	res, err := s.ListPostsByCategory(context.Background(), req)
 	if err != nil {
 		t.Errorf("unexpected error %v", err)
 	}
