@@ -174,6 +174,10 @@ func (db *db) createPost(title, url string, userUID, categoryUID uuid.UUID) (*Po
 	post.ModifiedAt = now
 
 	result, err := db.Exec(query, post.UID.String(), userUID.String(), categoryUID.String(), post.Title, post.URL, post.CreatedAt, post.ModifiedAt)
+	if err != nil {
+		return nil, err
+	}
+
 	nRows, err := result.RowsAffected()
 	if err != nil {
 		return nil, err
@@ -189,6 +193,10 @@ func (db *db) createPost(title, url string, userUID, categoryUID uuid.UUID) (*Po
 func (db *db) updatePost(uid uuid.UUID, title, url string) error {
 	query := "UPDATE posts SET title=COALESCE(NULLIF($1,''), title), url=COALESCE(NULLIF($2,''), url), modified_at=$3 WHERE uid=$4"
 	result, err := db.Exec(query, title, url, time.Now(), uid.String())
+	if err != nil {
+		return err
+	}
+
 	nRows, err := result.RowsAffected()
 	if err != nil {
 		return err
@@ -204,6 +212,10 @@ func (db *db) updatePost(uid uuid.UUID, title, url string) error {
 func (db *db) deletePost(uid uuid.UUID) error {
 	query := "DELETE FROM posts WHERE uid=$1"
 	result, err := db.Exec(query, uid.String())
+	if err != nil {
+		return err
+	}
+
 	nRows, err := result.RowsAffected()
 	if err != nil {
 		return err
